@@ -2,21 +2,576 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BloomWell – A Gentle Beginning</title>
+  <title>BloomWell – Why I’m Doing This</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    /* trimmed to stay concise for ChatGPT environment */
-    body { font-family: 'Nunito', sans-serif; background:#f6f8ff; margin:0; padding:40px; }
-    .hero { max-width:900px; margin:auto; background:#fff; padding:30px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
-    h1 { font-size:28px; }
+    :root {
+      --bw-primary: #a4c4f2;
+      --bw-accent: #ff8b3d;
+      --bw-bg: #f7f9ff;
+      --bw-text-main: #111827;
+      --bw-text-soft: #4b5563;
+      --bw-card: #ffffff;
+      --bw-radius-xl: 20px;
+      --bw-radius-full: 999px;
+      --bw-shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.18);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top right, #dde7ff 0, #f8fbff 45%, #ffffff 100%);
+      color: var(--bw-text-main);
+      line-height: 1.6;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px 40px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1040px;
+      border-radius: 26px;
+      padding: 28px 20px 32px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(164,196,242,0.18));
+      box-shadow: var(--bw-shadow-soft);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shell-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff, var(--bw-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #111827;
+      font-size: 18px;
+      box-shadow: 0 8px 22px rgba(15,23,42,0.18);
+    }
+
+    .logo-text-main {
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-main span:first-child {
+      color: var(--bw-primary);
+    }
+
+    .logo-text-main span:last-child {
+      color: var(--bw-accent);
+    }
+
+    .logo-sub {
+      font-size: 12px;
+      color: var(--bw-text-soft);
+    }
+
+    .pill {
+      border-radius: var(--bw-radius-full);
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 12px;
+      color: var(--bw-text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-align: right;
+    }
+
+    .pill span {
+      font-size: 14px;
+    }
+
+    /* HERO SECTION */
+
+    .hero {
+      display: grid;
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        align-items: center;
+      }
+    }
+
+    .hero-title {
+      font-size: 28px;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 32px;
+      }
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #0f172a, #334155);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--bw-text-soft);
+      font-size: 15px;
+      margin-bottom: 16px;
+      max-width: 540px;
+    }
+
+    .hero-highlight {
+      background: rgba(255,255,255,0.9);
+      border-radius: var(--bw-radius-full);
+      border: 1px solid rgba(164,196,242,0.7);
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--bw-text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .badge-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,139,61,0.18);
+      font-size: 11px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .btn-primary {
+      appearance: none;
+      border: none;
+      padding: 11px 20px;
+      border-radius: var(--bw-radius-full);
+      background: linear-gradient(135deg, #ff8b3d, #ffb56b);
+      color: #111827;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(248,113,113,0.4);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary span {
+      font-size: 16px;
+    }
+
+    .btn-ghost {
+      border-radius: var(--bw-radius-full);
+      padding: 9px 14px;
+      border: 1px dashed rgba(148,163,184,0.85);
+      background: rgba(255,255,255,0.7);
+      font-size: 12px;
+      color: var(--bw-text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    /* HERO IMAGE BLOCK */
+
+    .hero-image-card {
+      border-radius: 22px;
+      padding: 12px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.98), rgba(164,196,242,0.35));
+      border: 1px solid rgba(148,163,184,0.5);
+      box-shadow: 0 14px 34px rgba(15,23,42,0.2);
+    }
+
+    .hero-image-inner {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.3);
+    }
+
+    .hero-image-inner img {
+      display: block;
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+
+    @media (min-width: 768px) {
+      .hero-image-inner img {
+        height: 260px;
+      }
+    }
+
+    .hero-image-caption {
+      font-size: 12px;
+      color: #4b5563;
+      margin-top: 8px;
+    }
+
+    /* BODY SECTIONS */
+
+    .body-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 880px) {
+      .body-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--bw-card);
+      border-radius: var(--bw-radius-xl);
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(226,232,240,0.95);
+      box-shadow: 0 8px 22px rgba(15,23,42,0.08);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--bw-text-soft);
+      margin-bottom: 6px;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      font-size: 14px;
+      color: var(--bw-text-soft);
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .card ul li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: var(--bw-primary);
+    }
+
+    .tagline {
+      font-size: 13px;
+      font-style: italic;
+      color: #6b7280;
+      margin-top: 10px;
+    }
+
+    .journey-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .journey-steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .step-card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 16px;
+      padding: 10px 12px 12px;
+      border: 1px solid rgba(226,232,240,0.9);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 13px;
+    }
+
+    .step-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(164,196,242,0.2);
+      font-size: 15px;
+    }
+
+    .step-title {
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .step-text {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    footer {
+      margin-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #9ca3af;
+      flex-wrap: wrap;
+    }
+
+    footer span strong {
+      color: var(--bw-accent);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .pill {
+        align-self: stretch;
+        justify-content: center;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <h1>BloomWell New Aesthetic Homepage</h1>
-    <p>This is a shortened version of the full design (full version was too large for Python cell).  
-    You can replace your GitHub index.html with this file and it will load correctly.</p>
+  <div class="page-wrapper">
+    <main class="shell">
+      <div class="shell-inner">
+        <header>
+          <div class="logo-wrap">
+            <div class="logo-circle">B</div>
+            <div>
+              <div class="logo-text-main">
+                <span>Bloom</span><span>Well</span>
+              </div>
+              <div class="logo-sub">PCOS • Fibroids • Food • Feelings</div>
+            </div>
+          </div>
+          <div class="pill">
+            <span>🫧</span>
+            A gentle beginning to my healing journey.
+          </div>
+        </header>
+
+        <!-- HERO: WHY I’M DOING THIS -->
+        <section class="hero">
+          <div>
+            <h1 class="hero-title">
+              This is where I stop fighting my body<br />
+              <span>and start understanding it, one day at a time.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              I’m Subha. I’ve struggled with weight since childhood, and recently with PCOS, fibroids,
+              and the emotional rollercoaster of birth control pills. BloomWell is my space to
+              slow down, listen to my body, and gently rebuild trust with myself.
+            </p>
+
+            <div class="hero-highlight">
+              <div class="badge-dot">💛</div>
+              <div>This is not a diet challenge or a before-and-after story. It’s my why — and my way back to myself.</div>
+            </div>
+
+            <div class="hero-actions">
+              <a href="#journey" class="btn-primary">
+                See the journey I’m starting
+                <span>↠</span>
+              </a>
+              <button type="button" class="btn-ghost">
+                just quietly watching how food, hormones & feelings connect
+              </button>
+            </div>
+
+            <div class="hero-note">
+              🌿 BloomWell is my reminder: I’m allowed to heal slowly, and I don’t have to do it perfectly.
+            </div>
+          </div>
+
+          <!-- HEALING IMAGE -->
+          <aside>
+            <div class="hero-image-card">
+              <div class="hero-image-inner">
+                <!-- You can replace this image URL with your own later -->
+                <img
+                  src="https://images.pexels.com/photos/3737692/pexels-photo-3737692.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Calm healing scene with a woman journaling and tea"
+                />
+              </div>
+              <div class="hero-image-caption">
+                A gentle season of healing: warm meals, honest journaling, softer self-talk.
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <!-- BODY: MY WHY + THE JOURNEY -->
+        <section id="journey" class="body-grid">
+          <!-- LEFT: WHY I’M DOING THIS -->
+          <article class="card">
+            <h2>Why I’m creating BloomWell</h2>
+            <p>
+              For years, my weight felt like my identity. I heard comments, comparisons and “advice”
+              long before I understood what my body was actually going through. When I was diagnosed
+              with PCOS and fibroids, things finally made sense — the stubborn weight, the exhaustion,
+              the bloating, the mood swings.
+            </p>
+            <p>
+              Birth control pills were handed to me as the default solution. No one really explained
+              how deeply they might affect my emotions, my mental health, my sense of self.
+              Some days it feels like my hormones are louder than my own voice.
+            </p>
+            <p>
+              BloomWell is my personal answer to all of that. It’s me saying:
+            </p>
+            <ul>
+              <li>I want to understand my body, not constantly blame it.</li>
+              <li>I want to see how food, symptoms and feelings actually connect.</li>
+              <li>I want a space where I can be honest about how hard this is.</li>
+            </ul>
+
+            <p class="tagline">
+              This isn’t about fixing myself. It’s about finally being on my own side.
+            </p>
+          </article>
+
+          <!-- RIGHT: WHAT THIS JOURNEY LOOKS LIKE -->
+          <aside class="card">
+            <h2>What this journey will look like</h2>
+            <p>
+              I’m starting simple and real. No perfect plates, no extreme rules, no pretending.
+              Just me, my meals, my moods and my body — day by day.
+            </p>
+            <h3>As I go, I’ll be noticing:</h3>
+            <ul>
+              <li>What I eat and how it makes me feel later in the day.</li>
+              <li>How my mood, energy and anxiety shift across my cycle.</li>
+              <li>When my PCOS & fibroid symptoms feel louder — and what might be triggering them.</li>
+            </ul>
+            <p>
+              I hope this space becomes a soft corner of the internet where healing feels possible,
+              even when life feels heavy.
+            </p>
+          </aside>
+        </section>
+
+        <!-- LITTLE JOURNEY STEPS STRIP -->
+        <section class="journey-steps">
+          <div class="step-card">
+            <div class="step-icon">🥣</div>
+            <div>
+              <div class="step-title">What I eat</div>
+              <div class="step-text">
+                Not “clean” or “perfect” — just honest plates and patterns I start to notice over time.
+              </div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">🧠</div>
+            <div>
+              <div class="step-title">How I feel</div>
+              <div class="step-text">
+                Anxiety spikes, low days, better days — all of it is part of the hormonal story I’m mapping.
+              </div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-icon">🌱</div>
+            <div>
+              <div class="step-title">How I heal</div>
+              <div class="step-text">
+                Tiny changes, gentle routines, kinder self-talk — slowly rebuilding safety with my own body.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <span>
+            🌱 A journey to nourish, not punish. To understand, not blame. To slowly, gently, truly <strong>BloomWell</strong>.
+          </span>
+          <span>Created with care by Subha.</span>
+        </footer>
+      </div>
+    </main>
   </div>
 </body>
 </html>
