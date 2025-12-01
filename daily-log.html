@@ -222,3 +222,442 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
+    }
+
+    .edit-btn span {
+      font-size: 12px;
+    }
+
+    .journal-box {
+      border-radius: 14px;
+      border: 1px dashed rgba(148,163,184,0.8);
+      background: rgba(248,250,252,0.9);
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--bw-text-soft);
+      min-height: 70px;
+      white-space: pre-line;
+      outline: none;
+    }
+
+    .journal-box[contenteditable="true"] {
+      background: #ffffff;
+      border-style: solid;
+      box-shadow: inset 0 0 0 1px rgba(164,196,242,0.7);
+    }
+
+    .journal-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+      margin-top: 6px;
+    }
+
+    .mood-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
+    .mood-chip {
+      font-size: 11px;
+      border-radius: var(--bw-radius-full);
+      padding: 5px 10px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(255,255,255,0.95);
+      color: #4b5563;
+    }
+
+    .mood-chip--soft {
+      background: rgba(164,196,242,0.16);
+      border-color: rgba(164,196,242,0.7);
+    }
+
+    .divider {
+      margin: 12px 0 10px;
+      height: 1px;
+      border-bottom: 1px dashed rgba(209,213,219,0.9);
+    }
+
+    .tagline {
+      font-size: 12px;
+      font-style: italic;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    /* Food log */
+
+    .food-table-wrapper {
+      margin-top: 6px;
+      border-radius: 14px;
+      border: 1px solid rgba(226,232,240,0.9);
+      overflow: hidden;
+      background: #f9fafb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    thead {
+      background: rgba(164,196,242,0.12);
+    }
+
+    th, td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(226,232,240,0.9);
+      text-align: left;
+    }
+
+    th {
+      font-weight: 700;
+      color: #374151;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .meal-label {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .totals-row {
+      background: rgba(255,139,61,0.05);
+      font-weight: 700;
+    }
+
+    .small-note {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #9ca3af;
+      flex-wrap: wrap;
+    }
+
+    footer span strong {
+      color: var(--bw-accent);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .pill {
+        align-self: stretch;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <main class="shell">
+      <div class="shell-inner">
+        <header>
+          <div class="logo-wrap">
+            <div class="logo-circle">B</div>
+            <div>
+              <div class="logo-text-main">
+                <span>Bloom</span><span>Well</span>
+              </div>
+              <div class="logo-sub">Daily journal • Food • Mood • Healing</div>
+            </div>
+          </div>
+          <div class="pill">
+            <span>📓</span>
+            One honest day at a time.
+          </div>
+        </header>
+
+        <div class="top-bar">
+          <div class="date-label">
+            <!-- Change this date & label for each entry -->
+            Dec 1, 2025
+            <span> • Day 1 of my BloomWell journey</span>
+          </div>
+          <a href="index.html" class="back-link">
+            <span>←</span> Back to home
+          </a>
+        </div>
+
+        <div class="grid">
+          <!-- LEFT: JOURNALING -->
+          <section class="card">
+            <div class="section-header">
+              <h2>Morning check-in</h2>
+              <button class="edit-btn" type="button" data-edit-target="morning-wake">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+            <p class="hint">How did I wake up today? What’s sitting on my heart, mind, or body?</p>
+
+            <div class="journal-label">after I woke up</div>
+            <div id="morning-wake" class="journal-box" contenteditable="false">
+Today I woke up feeling...
+
+My body feels...
+
+My first thoughts were...
+            </div>
+
+            <div class="section-header" style="margin-top: 14px;">
+              <h3>What I want to do today</h3>
+              <button class="edit-btn" type="button" data-edit-target="today-intentions">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+            <p class="hint">Tiny intentions only. Gentle, realistic, kind to myself.</p>
+            <div id="today-intentions" class="journal-box" contenteditable="false">
+Today, I would feel proud of myself if I:
+
+•  
+•  
+•  
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-header">
+              <h3>Morning mood</h3>
+              <button class="edit-btn" type="button" data-edit-target="morning-mood-text">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+            <p class="hint">Choose words that feel true — not what you think you “should” feel.</p>
+            <div class="mood-row">
+              <span class="mood-chip mood-chip--soft">calm</span>
+              <span class="mood-chip">anxious</span>
+              <span class="mood-chip">hopeful</span>
+              <span class="mood-chip">tired</span>
+              <span class="mood-chip">overwhelmed</span>
+              <span class="mood-chip">neutral</span>
+            </div>
+            <div id="morning-mood-text" class="journal-box" contenteditable="false">
+If I had to describe my morning mood in one or two sentences, I’d say…
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-header">
+              <h2>Evening reflection</h2>
+              <button class="edit-btn" type="button" data-edit-target="evening-reflection">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+            <p class="hint">How did the day actually feel in my body and mind?</p>
+
+            <h3>End-of-day mood</h3>
+            <div class="mood-row">
+              <span class="mood-chip mood-chip--soft">lighter</span>
+              <span class="mood-chip">heavier</span>
+              <span class="mood-chip">peaceful</span>
+              <span class="mood-chip">drained</span>
+              <span class="mood-chip">grateful</span>
+              <span class="mood-chip">numb</span>
+            </div>
+
+            <div id="evening-reflection" class="journal-box" contenteditable="false">
+Tonight I feel...
+
+What felt kind to my body today?
+
+What felt hard or heavy?
+
+One thing I want to thank myself for today is…
+            </div>
+
+            <p class="tagline">
+              🌿 I don’t have to get it all right. I just have to keep showing up for myself.
+            </p>
+          </section>
+
+          <!-- RIGHT: FOOD + MACROS -->
+          <aside class="card">
+            <div class="section-header">
+              <h2>What I ate today</h2>
+              <button class="edit-btn" type="button" data-edit-target="food-table">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+            <p class="hint">
+              Simple overview of my meals with approximate macros. This is information, not judgment.
+            </p>
+
+            <div id="food-table" class="food-table-wrapper" contenteditable="false">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Meal</th>
+                    <th>What I ate</th>
+                    <th>Calories</th>
+                    <th>Protein (g)</th>
+                    <th>Carbs (g)</th>
+                    <th>Fats (g)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="meal-label">Meal 1</td>
+                    <td>e.g. 2 eggs, sautéed veggies, 1 slice toast</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                  </tr>
+                  <tr>
+                    <td class="meal-label">Meal 2</td>
+                    <td>e.g. chicken, rice, veggies</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                  </tr>
+                  <tr>
+                    <td class="meal-label">Snack(s)</td>
+                    <td>e.g. greek yogurt, nuts, fruit</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                  </tr>
+                  <tr class="totals-row">
+                    <td class="meal-label">Total</td>
+                    <td>—</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="small-note">
+              I can estimate macros using any app or just rough guesses. The goal is awareness, not perfection.
+            </p>
+
+            <div class="section-header" style="margin-top: 10px;">
+              <h3>How my body responded</h3>
+              <button class="edit-btn" type="button" data-edit-target="body-response">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+            <div id="body-response" class="journal-box" contenteditable="false">
+Bloating / pain / cramps today:  
+
+Energy after meals:  
+
+Cravings (time & what I craved):  
+            </div>
+
+            <div class="section-header" style="margin-top: 10px;">
+              <h3>One gentle note to myself</h3>
+              <button class="edit-btn" type="button" data-edit-target="gentle-note">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+            <div id="gentle-note" class="journal-box" contenteditable="false">
+Today I want to remind myself that…
+            </div>
+          </aside>
+        </div>
+
+        <footer>
+          <span>📓 This page is my daily log — a soft record of how I’m really doing.</span>
+          <span>Part of my <strong>BloomWell</strong> journey.</span>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Helper: localStorage key prefix so it only affects this page/site
+    const PREFIX = "bw-daily-";
+
+    function initEditableSection(id) {
+      const area = document.getElementById(id);
+      if (!area) return;
+
+      // Restore from localStorage if present
+      const saved = localStorage.getItem(PREFIX + id);
+      if (saved !== null) {
+        area.innerText = saved;
+      }
+
+      // No need to wire events here; handled by buttons
+    }
+
+    function toggleEdit(btn, targetId) {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+
+      const isEditing = el.getAttribute("contenteditable") === "true";
+
+      if (isEditing) {
+        // Turn off editing and save
+        el.setAttribute("contenteditable", "false");
+        btn.innerHTML = '<span>✏️</span> Edit';
+        // Save plain text to localStorage
+        localStorage.setItem(PREFIX + targetId, el.innerText.trim());
+      } else {
+        // Enable editing
+        el.setAttribute("contenteditable", "true");
+        btn.innerHTML = '<span>💾</span> Save';
+        el.focus();
+        // Move cursor to end
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // List of editable section IDs
+      const editableIds = [
+        "morning-wake",
+        "today-intentions",
+        "morning-mood-text",
+        "evening-reflection",
+        "food-table",
+        "body-response",
+        "gentle-note"
+      ];
+
+      editableIds.forEach(initEditableSection);
+
+      // Wire up all edit buttons
+      document.querySelectorAll(".edit-btn").forEach(function (btn) {
+        const targetId = btn.getAttribute("data-edit-target");
+        if (!targetId) return;
+
+        btn.addEventListener("click", function () {
+          toggleEdit(btn, targetId);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
